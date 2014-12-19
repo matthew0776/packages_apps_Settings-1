@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -67,5 +68,10 @@ public class VanirInterface extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-    } 
+
+    private void updateRebootDialog() {
+        Intent u = new Intent();
+        u.setAction(Intent.UPDATE_POWER_MENU);
+        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
+    }
 }
