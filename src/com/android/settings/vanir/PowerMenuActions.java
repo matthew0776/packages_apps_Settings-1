@@ -43,8 +43,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PowerMenuActions extends SettingsPreferenceFragment {
-	private static final String TAG = "PowerMenuActions";
-	private static final boolean DEBUG = false;
+    private static final String TAG = "PowerMenuActions";
+    private static final boolean DEBUG = false;
 
     private CheckBoxPreference mPowerPref;
     private CheckBoxPreference mRebootPref;
@@ -55,7 +55,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     private CheckBoxPreference mSettingsPref;
     private CheckBoxPreference mLockdownPref;
     private CheckBoxPreference mProfilePref;
-    private CheckBoxPreference mImmersiveModePref;
 
     Context mContext;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
@@ -73,34 +72,32 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         mAllActions = PowerMenuConstants.getAllActions();
         
         for (String action : mAllActions) {
-			// Remove preferences not present in the overlay
+            // Remove preferences not present in the overlay
             if (!isActionAllowed(action)) {
-				getPreferenceScreen().removePreference(findPreference(action));
-				continue;
-			}
+                getPreferenceScreen().removePreference(findPreference(action));
+                continue;
+            }
 
-			if (action.equals(GLOBAL_ACTION_KEY_POWER)) {
-				mPowerPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_POWER);
-			} else if (action.equals(GLOBAL_ACTION_KEY_REBOOT)) {
-				mRebootPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_REBOOT);
-			} else if (action.equals(GLOBAL_ACTION_KEY_AIRPLANE)) {
-				mAirplanePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_AIRPLANE);
-			} else if (action.equals(GLOBAL_ACTION_KEY_BUGREPORT)) {
-				mBugReportPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
-			} else if (action.equals(GLOBAL_ACTION_KEY_SILENT)) {
-				mSilentPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
-			} else if (action.equals(GLOBAL_ACTION_KEY_USERS)) {
-			    mUsersPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_USERS);
-			} else if (action.equals(GLOBAL_ACTION_KEY_SETTINGS)) {
-				mSettingsPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SETTINGS);
-			} else if (action.equals(GLOBAL_ACTION_KEY_LOCKDOWN)) {
-				mLockdownPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
-			} else if (action.equals(GLOBAL_ACTION_KEY_PROFILE)) {
-				mProfilePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_PROFILE);
-			} else if (action.equals(GLOBAL_ACTION_KEY_IMMERSIVE)) {
-				mImmersiveModePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_IMMERSIVE);
-			}
-		}
+            if (action.equals(GLOBAL_ACTION_KEY_POWER)) {
+                mPowerPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_POWER);
+            } else if (action.equals(GLOBAL_ACTION_KEY_REBOOT)) {
+                mRebootPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_REBOOT);
+            } else if (action.equals(GLOBAL_ACTION_KEY_AIRPLANE)) {
+                mAirplanePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_AIRPLANE);
+            } else if (action.equals(GLOBAL_ACTION_KEY_BUGREPORT)) {
+                mBugReportPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
+            } else if (action.equals(GLOBAL_ACTION_KEY_SILENT)) {
+                mSilentPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
+            } else if (action.equals(GLOBAL_ACTION_KEY_USERS)) {
+                mUsersPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_USERS);
+            } else if (action.equals(GLOBAL_ACTION_KEY_SETTINGS)) {
+                mSettingsPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SETTINGS);
+            } else if (action.equals(GLOBAL_ACTION_KEY_LOCKDOWN)) {
+                mLockdownPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
+            } else if (action.equals(GLOBAL_ACTION_KEY_PROFILE)) {
+                mProfilePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_PROFILE);
+            }
+        }
 
         getUserConfig();
     }
@@ -132,19 +129,16 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         if (mProfilePref != null)
                 mProfilePref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_PROFILE));
 
-        if (mImmersiveModePref != null)
-                mImmersiveModePref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_IMMERSIVE));
-
         if (mUsersPref != null) {
             if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
                 getPreferenceScreen().removePreference(findPreference(GLOBAL_ACTION_KEY_USERS));
             } else {
-				List<UserInfo> users = ((UserManager) mContext.getSystemService(Context.USER_SERVICE)).getUsers();
-				boolean enabled = (users.size() > 1);
-				mUsersPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_USERS) && enabled);
-				mUsersPref.setEnabled(enabled);
-			}
-		}
+                List<UserInfo> users = ((UserManager) mContext.getSystemService(Context.USER_SERVICE)).getUsers();
+                boolean enabled = (users.size() > 1);
+                mUsersPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_USERS) && enabled);
+                mUsersPref.setEnabled(enabled);
+            }
+        }
         updatePreferences();
     }
 
@@ -194,10 +188,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
             value = mProfilePref.isChecked();
             updateUserConfig(value, GLOBAL_ACTION_KEY_PROFILE);
 
-        } else if (preference == mImmersiveModePref) {
-            value = mImmersiveModePref.isChecked();
-            updateUserConfig(value, GLOBAL_ACTION_KEY_IMMERSIVE);
-
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
@@ -209,11 +199,11 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     }
 
     private boolean isActionAllowed(String action) {
-		if (Arrays.asList(mAvailableActions).contains(action)) {
-			return true;
-		}
-		return false;
-	}
+        if (Arrays.asList(mAvailableActions).contains(action)) {
+            return true;
+        }
+        return false;
+    }
 
     private void updateUserConfig(boolean enabled, String action) {
         if (enabled) {
@@ -229,45 +219,29 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     }
 
     private void updatePreferences() {
-        boolean expanded = Settings.System.getInt(getContentResolver(),
-                Settings.System.EXPANDED_DESKTOP, 0) == 1;
-        int immersive = Settings.System.getInt(getContentResolver(),
-                Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
         boolean bugreport = Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0;
         boolean profiles = Settings.System.getInt(getContentResolver(),
                 Settings.System.SYSTEM_PROFILES_ENABLED, 1) != 0;
 
-        if (mImmersiveModePref != null) {
-			mImmersiveModePref.setEnabled(immersive != 0);
-			if (immersive == 0) {
-				mImmersiveModePref.setTitle(R.string.power_menu_immersive_disabled);
-			} else {
-				if (!expanded) {
-					mImmersiveModePref.setTitle(R.string.power_menu_immersive_mode);
-				} else {
-					mImmersiveModePref.setTitle(R.string.power_menu_expanded_mode);
-				}
-			}
-		}
 
         if (mProfilePref != null) {
-			mProfilePref.setEnabled(profiles);
-			if (profiles) {
-				mProfilePref.setTitle(R.string.power_menu_profiles_title);
-			} else {
-				mProfilePref.setTitle(R.string.power_menu_profiles_disabled);
-			}
-		}
+            mProfilePref.setEnabled(profiles);
+                if (profiles) {
+                    mProfilePref.setTitle(R.string.power_menu_profiles_title);
+                } else {
+                    mProfilePref.setTitle(R.string.power_menu_profiles_disabled);
+                }
+        }
 
-		if (mBugReportPref != null) {
-			mBugReportPref.setEnabled(bugreport);
-			if (bugreport) {
-				mBugReportPref.setTitle(R.string.power_menu_bug_report_title);
-			} else {
-				mBugReportPref.setTitle(R.string.power_menu_bug_report_disabled);
-			}
-		}
+        if (mBugReportPref != null) {
+            mBugReportPref.setEnabled(bugreport);
+                if (bugreport) {
+                    mBugReportPref.setTitle(R.string.power_menu_bug_report_title);
+                } else {
+                    mBugReportPref.setTitle(R.string.power_menu_bug_report_disabled);
+                }
+        }
     }
 
     private void getUserConfig() {
@@ -315,7 +289,7 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         updateRebootDialog();
     }
 
-	private void updateRebootDialog() {
+    private void updateRebootDialog() {
         Intent u = new Intent();
         u.setAction(Intent.UPDATE_POWER_MENU);
         mContext.sendBroadcastAsUser(u, UserHandle.ALL);

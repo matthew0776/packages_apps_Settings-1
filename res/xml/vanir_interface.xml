@@ -33,6 +33,7 @@
                 android:key="navigation_bar"
                 android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
                 android:title="@string/category_navbar"
+                android:icon="@drawable/ic_menu_add"
                 />
 
         <!-- Status Bar -->
@@ -42,13 +43,13 @@
                 android:fragment="com.android.settings.cyanogenmod.StatusBarSettings"
                 android:icon="@drawable/ic_settings_home"
                 />
+                
+        <!-- Power Menu -->
+        <PreferenceScreen
+                android:id="@+id/power_menu"
+                android:title="@string/power_menu_settings"
+                android:fragment="com.android.settings.vanir.PowerMenuActions"
+                android:icon="@drawable/ic_menu_add"
+                />
 
-
-    <PreferenceScreen
-            android:id="@+id/power_menu"
-            android:title="@string/power_menu_settings"
-            android:fragment="com.android.settings.vanir.PowerMenuActions"
-            />
-
-    </PreferenceCategory>
 </PreferenceScreen>

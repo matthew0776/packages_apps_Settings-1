@@ -72,9 +72,4 @@
                 android:title="@string/power_menu_bug_report_title"
                 android:defaultValue="false" />
 
-         <CheckBoxPreference
-                android:key="immersive"
-                android:title="@string/power_menu_immersive_mode"
-                android:defaultValue="false" />
-
 </PreferenceScreen>

@@ -68,10 +68,5 @@ public class VanirInterface extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-
-    private void updateRebootDialog() {
-        Intent u = new Intent();
-        u.setAction(Intent.UPDATE_POWER_MENU);
-        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
     }
 }
